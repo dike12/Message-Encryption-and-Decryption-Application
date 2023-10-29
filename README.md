@@ -39,7 +39,7 @@ This application provides a simple and user-friendly interface for encrypting an
 
 ### GIF Demo
 
-![Encryption and Decryption Demo](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazBjdW8wOTY0NXAxb2ZmcnB5dWFtMG94NmJoYnZlZzRzeHNtY3V4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eSsHEv0vzMb21GlcuQ/giphy.gif)
+![Encryption and Decryption Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazBjdW8wOTY0NXAxb2ZmcnB5dWFtMG94NmJoYnZlZzRzeHNtY3V4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eSsHEv0vzMb21GlcuQ/giphy.gif)
 
 ### Note
 For demonstration purposes, the application uses a hardcoded secret key ("1234"). In a real-world application, it is recommended to implement a more secure method for handling encryption keys.
