@@ -6,23 +6,27 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 
+# Function to reset the input fields
 def reset():
     code.set("")
     text1.delete(1.0, END)
 
+# Function to generate a random 32-byte key and save it to a file
 def generate_key():
-    key = os.urandom(32)  # Generate a random 32-byte key
+    key = os.urandom(32)
     with open("secret.key", "wb") as key_file:
         key_file.write(key)
 
-# Generate and save the key (do this once)
+# Generate and save the key (this should be done once)
 generate_key()
 
+# Function to load the saved key from the file
 def load_key():
     return open("secret.key", "rb").read()
 
+# Function to encrypt a message using AES encryption
 def aes_encrypt(key, message):
-    iv = os.urandom(16)  # Generate IV
+    iv = os.urandom(16)  # Generate a 16-byte IV (Initialization Vector)
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
     encryptor = cipher.encryptor()
     padder = padding.PKCS7(128).padder()
@@ -30,6 +34,7 @@ def aes_encrypt(key, message):
     encrypted_message = encryptor.update(padded_data) + encryptor.finalize()
     return base64.b64encode(iv + encrypted_message).decode()  # Convert to Base64 and prepend IV
 
+# Function to decrypt a message using AES decryption
 def aes_decrypt(key, encrypted_message):
     encrypted_message_bytes = base64.b64decode(encrypted_message)
     iv = encrypted_message_bytes[:16]  # Extract the IV from the beginning
@@ -40,7 +45,7 @@ def aes_decrypt(key, encrypted_message):
     decrypted_message = unpadder.update(decrypted_padded_message) + unpadder.finalize()
     return decrypted_message.decode()
 
-
+# Function to handle the encryption process
 def encrypt():
     password = code.get()
 
@@ -63,6 +68,7 @@ def encrypt():
     else:
         messagebox.showerror("encryption", "Invalid password")
 
+# Function to handle the decryption process
 def decrypt():
     password = code.get()
 
@@ -85,6 +91,7 @@ def decrypt():
     else:
         messagebox.showerror("encryption", "Invalid password")
 
+# Function to create the main GUI screen
 def main_screen():
     global screen
     global code
@@ -100,7 +107,7 @@ def main_screen():
     screen.iconphoto(False, image_icon)
     screen.title("Security")
 
-    Label(text="Enter text for encryption and decreption", fg= "black", font=("calibri", 13)).place(x=10,y=10)
+    Label(text="Enter text for encryption and decryption", fg= "black", font=("calibri", 13)).place(x=10,y=10)
     text1 = Text(font="Robote 20", bg="white", relief=GROOVE,wrap=WORD, bd=0)
     text1.place(x=10,y=50, width=355, height=100)
 
@@ -114,4 +121,5 @@ def main_screen():
 
     screen.mainloop()
 
+# Start the main screen
 main_screen()
